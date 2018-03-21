@@ -416,11 +416,11 @@ body {
   }
 
   .fa-twitter {
-    color: #FF5722;
+    color: #007bb6;
   }
 
   .fa-github {
-    color: black;
+    color: #222222;
   }
 
   .fa-linkedin {
@@ -490,7 +490,7 @@ body {
 }*/
 
 .profile-card header h1 {
-  color: #FF5722;
+  color: #59a194;
 }
 
 .profile-card header a {
