@@ -1,342 +1,127 @@
-function styleDefault(){
-	$('#particles-js').css("background-color", "rgb(0,0,0)");
-	particlesJS("particles-js", {
-		"particles": {
-		"number": {
-			"value": 80,
-			"density": {
-			"enable": true,
-			"value_area": 800
-			}
-		},
-		"color": {
-			"value": "#ffffff"
-		},
-		"shape": {
-			"type": "circle",
-			"stroke": {
-			"width": 0,
-			"color": "#000000"
-			},
-			"polygon": {
-			"nb_sides": 5
-			},
-			"image": {
-			"src": "img/github.svg",
-			"width": 100,
-			"height": 100
-			}
-		},
-		"opacity": {
-			"value": 0.5,
-			"random": false,
-			"anim": {
-			"enable": false,
-			"speed": 1,
-			"opacity_min": 0.1,
-			"sync": false
-			}
-		},
-		"size": {
-			"value": 3,
-			"random": true,
-			"anim": {
-			"enable": false,
-			"speed": 40,
-			"size_min": 0.1,
-			"sync": false
-			}
-		},
-		"line_linked": {
-			"enable": true,
-			"distance": 150,
-			"color": "#ffffff",
-			"opacity": 0.4,
-			"width": 1
-		},
-		"move": {
-			"enable": true,
-			"speed": 6,
-			"direction": "none",
-			"random": false,
-			"straight": false,
-			"out_mode": "out",
-			"bounce": false,
-			"attract": {
-			"enable": false,
-			"rotateX": 600,
-			"rotateY": 1200
-			}
-		}
-		},
-		"interactivity": {
-		"detect_on": "canvas",
-		"events": {
-			"onhover": {
-			"enable": true,
-			"mode": "grab"
-			},
-			"onclick": {
-			"enable": true,
-			"mode": "push"
-			},
-			"resize": true
-		},
-		"modes": {
-			"grab": {
-			"distance": 400,
-			"line_linked": {
-				"opacity": 1
-			}
-			},
-			"bubble": {
-			"distance": 400,
-			"size": 40,
-			"duration": 2,
-			"opacity": 8,
-			"speed": 3
-			},
-			"repulse": {
-			"distance": 200,
-			"duration": 0.4
-			},
-			"push": {
-			"particles_nb": 4
-			},
-			"remove": {
-			"particles_nb": 2
-			}
-		}
-		},
-		"retina_detect": true
-	});
-};
+'use strict';
 
-function styleSpace(){
-	$('#particles-js').css("background-color", "rgb(35,39,65)");
-	particlesJS("particles-js", {
-		"particles": {
-			"number": {
-				"value": 160,
-				"density": {
-				"enable": true,
-				"value_area": 800
-				}
-			},
-			"color": {
-				"value": "#ffffff"
-			},
-			"shape": {
-				"type": "circle",
-				"stroke": {
-				"width": 0,
-				"color": "#000000"
-				},
-				"polygon": {
-				"nb_sides": 5
-				},
-				"image": {
-				"src": "img/github.svg",
-				"width": 100,
-				"height": 100
-				}
-			},
-			"opacity": {
-				"value": 1,
-				"random": true,
-				"anim": {
-				"enable": true,
-				"speed": 1,
-				"opacity_min": 0,
-				"sync": false
-				}
-			},
-			"size": {
-				"value": 3,
-				"random": true,
-				"anim": {
-				"enable": false,
-				"speed": 4,
-				"size_min": 0.3,
-				"sync": false
-				}
-			},
-			"line_linked": {
-				"enable": false,
-				"distance": 150,
-				"color": "#ffffff",
-				"opacity": 0.4,
-				"width": 1
-			},
-			"move": {
-				"enable": true,
-				"speed": 1,
-				"direction": "none",
-				"random": true,
-				"straight": false,
-				"out_mode": "out",
-				"bounce": false,
-				"attract": {
-				"enable": false,
-				"rotateX": 600,
-				"rotateY": 600
-				}
-			}
-			},
-			"interactivity": {
-			"detect_on": "canvas",
-			"events": {
-				"onhover": {
-				"enable": true,
-				"mode": "bubble"
-				},
-				"onclick": {
-				"enable": true,
-				"mode": "repulse"
-				},
-				"resize": true
-			},
-			"modes": {
-				"grab": {
-				"distance": 400,
-				"line_linked": {
-					"opacity": 1
-				}
-				},
-				"bubble": {
-				"distance": 250,
-				"size": 0,
-				"duration": 2,
-				"opacity": 0,
-				"speed": 3
-				},
-				"repulse": {
-				"distance": 400,
-				"duration": 0.4
-				},
-				"push": {
-				"particles_nb": 4
-				},
-				"remove": {
-				"particles_nb": 2
-				}
-			}
-		},
-		"retina_detect": true
-		});
-};
+$('.menu-mb').on('click', function () {
+    $('.menu-mb-block').fadeIn(200);
+});
+$('.menu-close').on('click', function () {
+    $('.menu-mb-block').fadeOut(200);
+});
+$(window).on('resize', function () {
+    var xx = window.innerWidth;
+    if (xx >= 768) {
+        $('.menu-mb-block').fadeOut(200);
+    }
+});
+$('.gotoAbout').on('click', function () {
+    $('.menu-mb-block').fadeOut(200);
+    $('html,body').animate({
+        scrollTop: $('#about').offset().top
+    }, 'slow')
+});
+$('.gotoDifference').on('click', function () {
+    $('.menu-mb-block').fadeOut(200);
+    $('html,body').animate({
+        scrollTop: $('#difference').offset().top
+    }, 'slow')
+});
+$('.gotoSchadule').on('click', function () {
+    $('.menu-mb-block').fadeOut(200);
+    $('html,body').animate({
+        scrollTop: $('#schedule').offset().top
+    }, 'slow')
+});
+$('.gotoCourse').on('click', function () {
+    $('.menu-mb-block').fadeOut(200);
+    $('html,body').animate({
+        scrollTop: $('#course').offset().top
+    }, 'slow')
+});
+$('.gototop').on('click', function () {
+    $('html,body').animate({
+        scrollTop: $('.wrapper').offset().top
+    }, 'slow')
+});
 
-function styleSnow(){
-	$('#particles-js').css("background-color", "rgb(100,149,237)");
-	particlesJS("particles-js", {
-		"particles": {
-		"number": {
-			"value": 400,
-			"density": {
-			"enable": true,
-			"value_area": 800
-			}
-		},
-		"color": {
-			"value": "#fff"
-		},
-		"shape": {
-			"type": "circle",
-			"stroke": {
-			"width": 0,
-			"color": "#000000"
-			},
-			"polygon": {
-			"nb_sides": 5
-			},
-			"image": {
-			"src": "img/github.svg",
-			"width": 100,
-			"height": 100
-			}
-		},
-		"opacity": {
-			"value": 0.5,
-			"random": true,
-			"anim": {
-			"enable": false,
-			"speed": 1,
-			"opacity_min": 0.1,
-			"sync": false
-			}
-		},
-		"size": {
-			"value": 10,
-			"random": true,
-			"anim": {
-			"enable": false,
-			"speed": 40,
-			"size_min": 0.1,
-			"sync": false
-			}
-		},
-		"line_linked": {
-			"enable": false,
-			"distance": 500,
-			"color": "#ffffff",
-			"opacity": 0.4,
-			"width": 2
-		},
-		"move": {
-			"enable": true,
-			"speed": 6,
-			"direction": "bottom",
-			"random": false,
-			"straight": false,
-			"out_mode": "out",
-			"bounce": false,
-			"attract": {
-			"enable": false,
-			"rotateX": 600,
-			"rotateY": 1200
-			}
-		}
-		},
-		"interactivity": {
-		"detect_on": "canvas",
-		"events": {
-			"onhover": {
-			"enable": true,
-			"mode": "bubble"
-			},
-			"onclick": {
-			"enable": true,
-			"mode": "repulse"
-			},
-			"resize": true
-		},
-		"modes": {
-			"grab": {
-			"distance": 400,
-			"line_linked": {
-				"opacity": 0.5
-			}
-			},
-			"bubble": {
-			"distance": 400,
-			"size": 4,
-			"duration": 0.3,
-			"opacity": 1,
-			"speed": 3
-			},
-			"repulse": {
-			"distance": 200,
-			"duration": 0.4
-			},
-			"push": {
-			"particles_nb": 4
-			},
-			"remove": {
-			"particles_nb": 2
-			}
-		}
-		},
-		"retina_detect": true
+$(window).scroll(function () {
+    var scrollPos = $(document).scrollTop();
+    if (scrollPos > 39) {
+        $('.wrapper').addClass('fixed-header');
+    } else {
+        $('.wrapper').removeClass('fixed-header');
+    }
+});
 
-	});
-};
+$('.carousel').carousel();
+$('.carousel2').carousel();
+
+$(window).on('resize', function () {
+    var xx = window.innerWidth;
+    if (xx >= 768) {
+        $('.menu-mb-block').fadeOut(200);
+    }
+});
+$('.popup-1').on('click touch', function () {
+    $('.popup-block-01').fadeIn(200);
+});
+$('.popup-2').on('click touch', function () {
+    $('.popup-block-02').fadeIn(200);
+});
+$('.close-popop').on('click touch', function () {
+    $('.fixed-sr').fadeOut(200);
+});
+
+
+(function () {
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+
+                var _name = $('#send-cv').find('input[name="firstname"]').val() + $('#send-cv').find('input[name="lastname"]').val();
+                var _mail = $('#send-cv').find('input[name="email"]').val();
+                var _number = $('#send-cv').find('input[name="phone"]').val();
+                var _select = $('#send-cv').find('select[name="select"]').val();
+                var _textarea = $('#send-cv').find('textarea[name="textarea"]').val();
+                var _link = "abc.com";
+
+                // console.log(_name)
+                // console.log(_mail)
+                // console.log(_number)
+                // console.log(_select)
+                // console.log(_textarea)
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                if (form.checkValidity() === true) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    $.ajax({
+                        type: "POST",
+                        url: _link,
+                        data: {
+                            'course': _select,
+                            'temporary_registration[course_id]': _select,
+                            'temporary_registration[name]': _name,
+                            'temporary_registration[email]': _mail,
+                            'temporary_registration[phone]': _number,
+                            'temporary_registration[address]': 'VN',
+                            'commit': _textarea
+                        },
+                        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                        success: function (data) {
+                            alert('Bạn đã đăng ký thành công');
+                            $('#send-cv').find("input[type=text], input[type=email], textarea").val("");
+                        },
+                        failure: function (data) {
+                            console.log(errMsg);
+                        }
+                    });
+
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+
