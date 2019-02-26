@@ -1,0 +1,13 @@
+# Created by .ignore
+# IntelliJ
+*.iml
+.idea/workspace.xml
+CVme.iml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+
+.idea/
