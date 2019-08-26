@@ -1,127 +1,168 @@
-'use strict';
 
-$('.menu-mb').on('click', function () {
-    $('.menu-mb-block').fadeIn(200);
-});
-$('.menu-close').on('click', function () {
-    $('.menu-mb-block').fadeOut(200);
-});
-$(window).on('resize', function () {
-    var xx = window.innerWidth;
-    if (xx >= 768) {
-        $('.menu-mb-block').fadeOut(200);
-    }
-});
-$('.gotoAbout').on('click', function () {
-    $('.menu-mb-block').fadeOut(200);
-    $('html,body').animate({
-        scrollTop: $('#about').offset().top
-    }, 'slow')
-});
-$('.gotoDifference').on('click', function () {
-    $('.menu-mb-block').fadeOut(200);
-    $('html,body').animate({
-        scrollTop: $('#difference').offset().top
-    }, 'slow')
-});
-$('.gotoSchadule').on('click', function () {
-    $('.menu-mb-block').fadeOut(200);
-    $('html,body').animate({
-        scrollTop: $('#schedule').offset().top
-    }, 'slow')
-});
-$('.gotoCourse').on('click', function () {
-    $('.menu-mb-block').fadeOut(200);
-    $('html,body').animate({
-        scrollTop: $('#course').offset().top
-    }, 'slow')
-});
-$('.gototop').on('click', function () {
-    $('html,body').animate({
-        scrollTop: $('.wrapper').offset().top
-    }, 'slow')
-});
+function showNotifyPopup() {
+  var popup = document.getElementById('popupNotify');
+  if (popup) {
+    popup.style.display = 'block';
+  }
+}
 
-$(window).scroll(function () {
-    var scrollPos = $(document).scrollTop();
-    if (scrollPos > 39) {
-        $('.wrapper').addClass('fixed-header');
+function closePopup(id) {
+  var popup = document.getElementById(id);
+  if (popup) {
+    popup.style.display = 'none';
+  }
+}
+
+function overlayClick(e) {
+  if (e.currentTarget == e.target) {
+    this.closePopup(e.currentTarget.id);
+  }
+}
+
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
+function keyPressEmail(e) {
+  if (e.keyCode == 13) {
+    submitEmail();
+    e.preventDefault();
+  }
+}
+
+function submitEmail() {
+  var email = $("#mailing-list input#email").val();
+  if (!validateEmail(email)) {
+    $('#mailing-list .alert-error-valid').show();
+    $('#mailing-list .alert-error').hide();
+    $('#mailing-list .alert-success').hide();
+    $('#mailing-list #submit').show();
+    $("#mailing-list input#email").show();
+  }
+  else {
+    $.ajax({
+      url: 'https://api.tomoapp.vn/api/v1/subscribers/ico/create',
+      // url: 'https://dev.tomoapp.me/api/v1/subscribers/ico/create',
+      type: "POST",
+      data: {
+        email: email
+      },
+      success: function () {
+        $('#mailing-list .alert-error').hide();
+        $('#mailing-list .alert-error-valid').hide();
+        $('#mailing-list .alert-success').show();
+        $('#mailing-list #submit').hide();
+        $("#mailing-list input#email").hide();
+        fbqtrack('track', 'CompleteRegistration');
+        ga('send', 'event', 'home_email_submit', 'submit_email', 'email');
+      },
+      error: function (e) {
+        $('#mailing-list .alert-error').show();
+        $('#mailing-list .alert-error-valid').hide();
+        $('#mailing-list .alert-success').hide();
+        $('#mailing-list #submit').show();
+        $("#mailing-list input#email").show();
+      },
+    });
+  }
+}
+
+
+$(document).ready(function () {
+  //------------------------------------//
+  //Navbar//
+  //------------------------------------//
+  var menu = $('.navbar');
+  $(window).bind('scroll', function (e) {
+    if ($(window).scrollTop() > 140) {
+      if (!menu.hasClass('open')) {
+        menu.addClass('open');
+      }
     } else {
-        $('.wrapper').removeClass('fixed-header');
+      if (menu.hasClass('open')) {
+        menu.removeClass('open');
+      }
     }
+  });
+
+  //------------------------------------//
+  //Scroll To//
+  //------------------------------------//
+  $(".scroll").click(function (event) {
+    // event.preventDefault();
+    $('html,body').animate({ scrollTop: $(this.hash).offset().top - 50 }, 800);
+  });
+
+  $('.videos-slider').slick({
+    arrows: false,
+    dots: true
+  });
+
+  $('.vision-slider').slick({
+    infinite: false,
+    initialSlide: 1,
+    arrows: false,
+    dots: true,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    centerMode: true,
+    variableWidth: true,
+    focusOnSelect: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1
+        }
+      }
+    ]
+  });
+
+  $('.testimonial-for').slick({
+    infinite: false,
+    initialSlide: 1,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    dots: false,
+    asNavFor: '.testimonial-nav',
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          dots: true,
+          fade: false
+        }
+      }
+    ]
+  });
+
+  $('.testimonial-nav').slick({
+    asNavFor: '.testimonial-for',
+    initialSlide: 1,
+    infinite: false,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    dots: false,
+    arrows: false,
+    centerMode: true,
+    focusOnSelect: true,
+    variableWidth: true
+  });
+
+  //------------------------------------//
+  //Wow Animation//
+  //------------------------------------//
+  // wow = new WOW(
+  //   {
+  //     boxClass: 'wow',      // animated element css class (default is wow)
+  //     animateClass: 'animated', // animation css class (default is animated)
+  //     offset: 0,          // distance to the element when triggering the animation (default is 0)
+  //     mobile: false        // trigger animations on mobile devices (true is default)
+  //   }
+  // );
+  // wow.init();
 });
-
-$('.carousel').carousel();
-$('.carousel2').carousel();
-
-$(window).on('resize', function () {
-    var xx = window.innerWidth;
-    if (xx >= 768) {
-        $('.menu-mb-block').fadeOut(200);
-    }
-});
-$('.popup-1').on('click touch', function () {
-    $('.popup-block-01').fadeIn(200);
-});
-$('.popup-2').on('click touch', function () {
-    $('.popup-block-02').fadeIn(200);
-});
-$('.close-popop').on('click touch', function () {
-    $('.fixed-sr').fadeOut(200);
-});
-
-
-(function () {
-    window.addEventListener('load', function () {
-        var forms = document.getElementsByClassName('needs-validation');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            form.addEventListener('submit', function (event) {
-
-                var _name = $('#send-cv').find('input[name="firstname"]').val() + $('#send-cv').find('input[name="lastname"]').val();
-                var _mail = $('#send-cv').find('input[name="email"]').val();
-                var _number = $('#send-cv').find('input[name="phone"]').val();
-                var _select = $('#send-cv').find('select[name="select"]').val();
-                var _textarea = $('#send-cv').find('textarea[name="textarea"]').val();
-                var _link = "abc.com";
-
-                // console.log(_name)
-                // console.log(_mail)
-                // console.log(_number)
-                // console.log(_select)
-                // console.log(_textarea)
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                if (form.checkValidity() === true) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    $.ajax({
-                        type: "POST",
-                        url: _link,
-                        data: {
-                            'course': _select,
-                            'temporary_registration[course_id]': _select,
-                            'temporary_registration[name]': _name,
-                            'temporary_registration[email]': _mail,
-                            'temporary_registration[phone]': _number,
-                            'temporary_registration[address]': 'VN',
-                            'commit': _textarea
-                        },
-                        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                        success: function (data) {
-                            alert('Bạn đã đăng ký thành công');
-                            $('#send-cv').find("input[type=text], input[type=email], textarea").val("");
-                        },
-                        failure: function (data) {
-                            console.log(errMsg);
-                        }
-                    });
-
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    }, false);
-})();
-
